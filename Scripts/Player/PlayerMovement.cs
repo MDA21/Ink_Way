@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     #region 3D移动逻辑
 
-    private void Update3DMovement()
+    public void Update3DMovement()
     {
         if (_moveAction == null || rb == null || _mainCamera == null) return;
 
