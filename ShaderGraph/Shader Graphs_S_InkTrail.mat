@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:yousandi.cn,2023:
---- !u!114 &-9158204014874754191
+--- !u!114 &-2537857690419338300
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,17 +20,17 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: S_InkBlob
-  m_Shader: {fileID: -6465566751694194690, guid: acab53c6e92065e439581327ed37b109,
+  m_Name: Shader Graphs_S_InkTrail
+  m_Shader: {fileID: -6465566751694194690, guid: 45b39220a6651194d9545969e7b9aeda,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2001
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -52,8 +52,6 @@ Material:
     m_Ints: []
     m_Floats:
     - _QueueControl: 0
-    - _QueueOffset: 1
-    - _WobbleIntensity: 0.05
-    - _WobbleSpeed: 2
+    - _QueueOffset: 0
     m_Colors: []
   m_BuildTextureStacks: []
