@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // 3D专属：Input System移动控制 + 速度关联果冻抖动效果
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement1 : MonoBehaviour
 {
     [Header("核心组件")]
     public Rigidbody rb;
@@ -20,9 +20,7 @@ public class PlayerMovement : MonoBehaviour
     
     private PlayerInputAction _inputActions;
     private InputAction _moveAction;
-    private InputAction _sinkAction;
-    public bool sinkOn;
-
+    
     private int _wobbleIntensityID;
     
     private Camera _mainCamera;
@@ -31,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
         InitInputSystem();
 
-        // InitRigidbody3D();
+        InitRigidbody3D();
 
         _mainCamera = Camera.main;
     }
@@ -44,19 +42,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         _moveAction?.Enable();
-        _sinkAction?.Enable();
-
-        if (_sinkAction != null)
-        {
-            _sinkAction.performed += OnSinkPerfomed;
-            _sinkAction.canceled += OnSinkCanceled;
-        }
     }
 
     private void OnDisable()
     {
         _moveAction?.Disable();
-        _sinkAction?.Disable();
     }
 
     private void Update()
@@ -64,10 +54,10 @@ public class PlayerMovement : MonoBehaviour
         UpdateJellyWobble();
     }
 
-    //private void FixedUpdate()
-    //{
-    //    Update3DMovement();
-    //}
+    private void FixedUpdate()
+    {
+        //Update3DMovement();
+    }
 
     #region 初始化方法
     private void InitInputSystem()
@@ -77,23 +67,19 @@ public class PlayerMovement : MonoBehaviour
             _inputActions = new PlayerInputAction();
         }
         _moveAction = _inputActions.Player.Move;
-        _sinkAction = _inputActions.Player.Sink;
-
-
     }
-
-    //private void InitRigidbody3D()
-    //{
-    //    if (rb == null)
-    //    {
-    //        rb = GetComponent<Rigidbody>();
-    //        if (rb == null) rb = gameObject.AddComponent<Rigidbody>();
-    //    }
-    //    rb.useGravity = true;
-    //    rb.freezeRotation = true;
-    //    rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-    //}
-
+    private void InitRigidbody3D()
+    {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+            if (rb == null) rb = gameObject.AddComponent<Rigidbody>();
+        }
+        rb.useGravity = true;
+        rb.freezeRotation = true;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+    }
+    
     private void InitJellyEffect()
     {
  
@@ -140,29 +126,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDir = cameraForward * moveInput.y + cameraRight * moveInput.x;
 
         rb.velocity = new Vector3(moveDir.x * moveSpeed, rb.velocity.y, moveDir.z * moveSpeed);
-    }
-    #endregion
-
-    #region 下沉输入回调
-    private void OnSinkPerfomed(InputAction.CallbackContext context)
-    {
-        // 在这里处理下沉逻辑
-        Debug.Log("玩家触发了下沉动作");
-
-        sinkOn = true;
-    }
-    private void OnSinkCanceled(InputAction.CallbackContext context)
-    {
-        // 在这里处理下沉取消逻辑
-        Debug.Log("玩家取消了下沉动作");
-
-        sinkOn = false;
-    }
-
-    public void UpdateSinkMovement()
-    {
-        Update3DMovement(moveSpeed * 2f);
-
     }
     #endregion
 

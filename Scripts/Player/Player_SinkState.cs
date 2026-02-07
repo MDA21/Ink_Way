@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_SinkState : PlayerState
 {
-    public Player_SinkState(PlayerStateMachine _stateMachine, Player _player, string _stateName) : base(_stateMachine, _player, _stateName)
+    public Player_SinkState(PlayerStateMachine _playerStateMachine, Player _player, string _stateName) : base(_playerStateMachine, _player, _stateName)
     {
     }
 
@@ -21,5 +21,16 @@ public class Player_SinkState : PlayerState
     public override void Update()
     {
         base.Update();
+        Debug.Log("玩家进入下沉状态");
+
+        if (player.movement.sinkOn)
+        {
+            player.movement.UpdateSinkMovement();
+            Debug.Log("触发动作");
+        }
+        else
+        {
+            player.playerStateMachine.ChangeState(player.normalState);
+        }
     }
 }

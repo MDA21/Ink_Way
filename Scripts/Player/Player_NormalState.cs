@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_NormalState : PlayerState
 {
-    public Player_NormalState(PlayerStateMachine _stateMachine, Player _player, string _stateName) : base(_stateMachine, _player, _stateName)
+    public Player_NormalState(PlayerStateMachine _playerStateMachine, Player _player, string _stateName) : base(_playerStateMachine, _player, _stateName)
     {
 
     }
@@ -24,6 +24,11 @@ public class Player_NormalState : PlayerState
     {
         base.Update();
 
-        player.movement.Update3DMovement();
+        player.movement.Update3DMovement(player.movement.moveSpeed);
+
+        if (player.movement.sinkOn)
+        {
+            playerStateMachine.ChangeState(player.sinkState);
+        }
     }
 }
